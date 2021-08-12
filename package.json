@@ -1,0 +1,35 @@
+{
+  "name": "admin-template",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "serve": "vite preview",
+    "typings": "ytt -c ./ytt.config.ts"
+  },
+  "dependencies": {
+    "ant-design-vue": "^2.2.6",
+    "axios": "^0.21.1",
+    "vue": "^3.2.2",
+    "vue-router": "^4.0.11",
+    "vuex": "^4.0.2",
+    "yapi-to-typescript": "^3.24.1"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.29.1",
+    "@typescript-eslint/parser": "^4.29.1",
+    "@vitejs/plugin-vue": "^1.4.0",
+    "@vue/compiler-sfc": "^3.2.2",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.24.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-vue": "^7.16.0",
+    "less": "^4.1.1",
+    "typescript": "^4.3.5",
+    "vite": "^2.4.4",
+    "vite-plugin-components": "^0.13.2",
+    "vue-tsc": "^0.2.2"
+  }
+}
