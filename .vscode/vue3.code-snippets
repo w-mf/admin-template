@@ -1,0 +1,22 @@
+{
+  "Vue3快速生成模板": {
+    "scope": "vue",
+    "prefix": "Vue3",
+    "body": [
+      "<template>",
+      "\t<div>",
+      "\t\t$1",
+      "\t</div>",
+      "</template>\n",
+      "<script setup lang='ts'>",
+      "import { onMounted } from 'vue';",
+      "\t\tonMounted(() => {});",
+      "\t\t$2",
+      "</script>\n",
+      "<style scoped lang='scss'>",
+      "\t$3",
+      "</style>"
+    ],
+    "description": "Vue3"
+  }
+}

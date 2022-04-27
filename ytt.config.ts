@@ -1,40 +1,49 @@
-import { defineConfig, ExtendedInterface, ChangeCase } from 'yapi-to-typescript';
-
-// 自定义函数名
-function getRequestFunctionName(interfaceInfo:ExtendedInterface, changeCase: ChangeCase) {
-  const dir = interfaceInfo.parsedPath.dir.split('/');
-  const name = `${interfaceInfo.method}
-        _${dir && dir.length > 0 && dir[dir.length - 1]}
-        _${interfaceInfo.parsedPath.name}`;
-  return changeCase.camelCase(name);
-}
+import { defineConfig, Interface, ChangeCase } from 'yapi-to-typescript';
+// yapi平台相关配置
+const yapiConfig = {
+  serverUrl: 'http://192.168.16.27:3000',
+  token: '5f137717367186837fe02a7dc4735e8342217c6192f647dbbc4fc427e26a537a',
+};
+// 配置详情。 https://fjc0k.github.io/yapi-to-typescript/handbook/config.html
 export default defineConfig([
   {
-    serverUrl: 'http://yapi.smart-xwork.cn/',
+    serverUrl: yapiConfig.serverUrl,
     typesOnly: false,
     target: 'typescript',
+    devEnvName: '测试',
+    prodEnvName: '正式',
     reactHooks: {
       enabled: false,
     },
-    prodEnvName: 'production',
-    outputFilePath: 'src/api/index.ts',
-    requestFunctionFilePath: 'src/utils/httpClient.ts',
+    jsonSchema: {
+      enabled: false,
+    },
+    comment: {
+      enabled: true,
+      tag: false,
+      requestHeader: false,
+    },
+    // 输出文件路径。 path.split('/')[0]
+    outputFilePath: (interfaceInfo: Interface, changeCase: ChangeCase) => {
+      const pathArr = (interfaceInfo.path.split('/') || []).filter((item) => item);
+      const fileName = pathArr.length ? pathArr[0] : 'undefined';
+      return `src/api/${changeCase.pascalCase(fileName)}.ts`;
+    },
+    requestFunctionFilePath: 'src/utils/HttpClient.ts',
     dataKey: 'data',
-    getRequestFunctionName,
-    getRequestDataTypeName: (interfaceInfo, changeCase) => {
-      const funName = getRequestFunctionName(interfaceInfo, changeCase);
-      return changeCase.pascalCase(`I_${funName}_Request`);
-    },
-    getResponseDataTypeName: (interfaceInfo, changeCase) => {
-      const funName = getRequestFunctionName(interfaceInfo, changeCase);
-      return changeCase.pascalCase(`I_${funName}_Response`);
-    },
     projects: [
       {
-        token: 'ecaf79cfcc4f5d01c830f41a826efbd8b5816e9db6a0634d0dcb6107314759dd',
+        token: yapiConfig.token,
         categories: [
           {
-            id: 0,
+            // 分类id。 0 全部，id前面加负号表示排除
+            id: [0],
+            // 请求函数的名称。 除 path.split('/')[0] 之外的path
+            getRequestFunctionName(interfaceInfo, changeCase) {
+              const pathArr = (interfaceInfo.path.split('/') || []).filter((item) => item);
+              pathArr.length && pathArr.splice(0, 1);
+              return changeCase.pascalCase(pathArr.join('/'));
+            },
           },
         ],
       },
