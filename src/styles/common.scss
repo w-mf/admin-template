@@ -1,0 +1,49 @@
+@import './mixin.scss';
+/* stylelint-disable-next-line selector-max-id */
+#app,
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    '微软雅黑', Arial, sans-serif;
+  background: #f4f4f5;
+}
+
+body .not-border {
+  border: none;
+}
+
+ul,
+li {
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+@each $item in up, down, left, right {
+  @each $lv in 1, 2, 3 {
+    .shadow-#{$lv}-#{$item} {
+      @include shadow-mixin($lv, $item);
+    }
+  }
+}
+
+.dialog-not-footer{
+  .el-dialog__footer{
+    display: none;
+  }
+}
+.dialog-form{
+  padding-right: 30px;
+  padding-bottom: 0;
+  width: 400px;
+}
+.flex-vertical-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+

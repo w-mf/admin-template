@@ -1,6 +1,6 @@
 # h5 模板
 
-一个 基于 vue3 + element-plus 的 pc 模板工程。
+一个 基于 vue3 + element-plus 的 admin 模板工程。
 
 ## 特色
 
@@ -13,7 +13,7 @@
 
 技术栈：vue3 + typescript + sass
 路由： vue-router 4
-状态库： vuex 4
+状态库： pinia
 ui 库： element-plus
 打包器： vite (node >= 12.0.0)
 

@@ -1,7 +1,76 @@
-@mixin basicShadow {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+@use 'sass:map';
+@mixin text-ellipsis() {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
-@mixin lightShadow {
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  color: #fff;
+
+// 阴影。 lv: 1,2,3 ; direction: up,down,left,right
+// lv1: 物体位于低层级，如悬浮状态，当操作完成或取消时，悬停状态反馈也跟随消失
+// lv2: 物体位于中层级，此时物体与基准面的关系是展开并跟随，物体由地面上的元素展开产生，会跟随元素所在层级的移动而移动
+// lv3: 物体位于高层级，该物体的运动和其他层级没有关联
+$shadow: (
+  shadow-1-up: (
+    0 -1px 2px -2px rgb(0 0 0 / 16%),
+    0 -3px 6px 0 rgb(0 0 0 / 12%),
+    0 -5px 12px 4px rgb(0 0 0 / 9%),
+  ),
+  shadow-1-down: (
+    0 1px 2px -2px rgb(0 0 0 / 16%),
+    0 3px 6px 0 rgb(0 0 0 / 12%),
+    0 5px 12px 4px rgb(0 0 0 / 9%),
+  ),
+  shadow-1-left: (
+    -1px 0 2px -2px rgb(0 0 0 / 16%),
+    -3px 0 6px 0 rgb(0 0 0 / 12%),
+    -5px 0 12px 4px rgb(0 0 0 / 9%),
+  ),
+  shadow-1-right: (
+    1px 0 2px -2px rgb(0 0 0 / 16%),
+    3px 0 6px 0 rgb(0 0 0 / 12%),
+    5px 0 12px 4px rgb(0 0 0 / 9%),
+  ),
+  shadow-2-up: (
+    0 -3px 6px -4px rgb(0 0 0 / 12%),
+    0 -6px 16px 0 rgb(0 0 0 / 8%),
+    0 -9px 28px 8px rgb(0 0 0 / 5%),
+  ),
+  shadow-2-down: (
+    0 3px 6px -4px rgb(0 0 0 / 12%),
+    0 6px 16px 0 rgb(0 0 0 / 8%),
+    0 9px 28px 8px rgb(0 0 0 / 5%),
+  ),
+  shadow-2-left: (
+    -3px 0 6px -4px rgb(0 0 0 / 12%),
+    -6px 0 16px 0 rgb(0 0 0 / 8%),
+    -9px 0 28px 8px rgb(0 0 0 / 5%),
+  ),
+  shadow-2-right: (
+    3px 0 6px -4px rgb(0 0 0 / 12%),
+    6px 0 16px 0 rgb(0 0 0 / 8%),
+    9px 0 28px 8px rgb(0 0 0 / 5%),
+  ),
+  shadow-3-up: (
+    0 -6px 16px -8px rgb(0 0 0 / 8%),
+    0 -9px 28px 0 rgb(0 0 0 / 5%),
+    0 -12px 48px 16px rgb(0 0 0 / 3%),
+  ),
+  shadow-3-down: (
+    0 6px 16px -8px rgb(0 0 0 / 8%),
+    0 9px 28px 0 rgb(0 0 0 / 5%),
+    0 12px 48px 16px rgb(0 0 0 / 3%),
+  ),
+  shadow-3-left: (
+    -6px 0 16px -8px rgb(0 0 0 / 8%),
+    -9px 0 28px 0 rgb(0 0 0 / 5%),
+    -12px 0 48px 16px rgb(0 0 0 / 3%),
+  ),
+  shadow-3-right: (
+    6px 0 16px -8px rgb(0 0 0 / 8%),
+    9px 0 28px 0 rgb(0 0 0 / 5%),
+    12px 0 48px 16px rgb(0 0 0 / 3%),
+  ),
+);
+@mixin shadow-mixin($lv, $direction) {
+  box-shadow: map.get($shadow, shadow-#{$lv}-#{$direction});
 }

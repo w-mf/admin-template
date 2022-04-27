@@ -16,7 +16,12 @@
     "paths": {
       "~/*": ["src/*"]
     },
-    "types": ["./node_modules/vite/client", "./node_modules/element-plus/global"]
+    "types": [
+      "./node_modules/vite/client",
+      "./node_modules/element-plus/global",
+      "./components.d.ts"
+    ],
+    "typeRoots": ["./node_modules/@types/"]
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }

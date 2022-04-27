@@ -1,33 +1,13 @@
 <template>
-  <div>
-    <router-link to="/login">login</router-link>
-    home<br />
-    home<br />
-    home<br />
-    home<br />
-    home<br />
-    home<br />
-    home<br />
-    home<br />
-    home<br />
-    home<br />
-    home<br />
-    home<br />
-    home<br />
-    home<br />
-    home<br />
-    home<br />
-    home<br />
-    home<br />
-    home<br />
-    home<br />
-  </div>
+  <div>home</div>
 </template>
 
 <script setup lang="ts">
-import { onUnmounted } from 'vue';
+import { onMounted } from 'vue';
 
-onUnmounted(() => {});
+onMounted(async () => {
+  //
+});
 </script>
 
 <style scoped lang="scss"></style>
